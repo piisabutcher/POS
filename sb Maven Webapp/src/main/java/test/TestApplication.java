@@ -10,7 +10,7 @@ public class TestApplication {
 	@RequestMapping("hello")
     @ResponseBody
     public String hello(){
-        return "hello world！";
+        return "hello world testttttt！";
     }
     
     public static void main(String[] args) {
