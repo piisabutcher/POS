@@ -22,10 +22,12 @@
       <version>3.8.1</version><!--$NO-MVN-MAN-VER$-->
       <scope>test</scope>
     </dependency>
+    <!-- springboot web -->
     <dependency> 
 	    <groupId>org.springframework.boot</groupId> 
 	    <artifactId>spring-boot-starter-web</artifactId>
      </dependency>
+     <!-- 数据库驱动 -->
      <dependency>
          <groupId>mysql</groupId>
          <artifactId>mysql-connector-java</artifactId>
@@ -33,10 +35,11 @@
      <dependency>
        <groupId>org.springframework.boot</groupId>
        <artifactId>spring-boot-starter-jdbc</artifactId>
-   </dependency>
+     </dependency>
   </dependencies>
   <build>
     <finalName>sb</finalName>
+    <!-- 插件 -->
     <plugins>
          <plugin>
             <groupId>org.springframework.boot</groupId>
