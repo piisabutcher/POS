@@ -1,5 +1,4 @@
-#端口
-server:
+server: #端口
   port: 8080
 spring:
   datasource:
@@ -8,23 +7,6 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-    # 使用druid数据源
-    type: com.alibaba.druid.pool.DruidDataSource
-    filters: stat
-    maxActive: 20
-    initialSize: 1
-    maxWait: 60000
-    minIdle: 1
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: select 'x'
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: true
-    maxOpenPreparedStatements: 20
-  #页面热加载
-  thymeleaf:
-    cache: false
-mybatis:
-  mapper-locations: classpath*:mybatis/mapper/*.xml
+    type: com.alibaba.druid.pool.DruidDataSource  #使用druid数据源
+# mybatis:
+  # mapper-locations: classpath*:mybatis/mapper/*.xml
