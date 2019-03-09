@@ -30,6 +30,13 @@ public class UserController {
 
     }
 
+    @RequestMapping("/login")
+    @ResponseBody
+    private User login(){
+
+        return null;
+    }
+
 
 
 }

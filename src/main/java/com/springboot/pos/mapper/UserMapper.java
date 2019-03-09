@@ -12,4 +12,7 @@ public interface UserMapper {
     @Select("select * from user")
     List<User> getAllUser();
 
+    @Select("select password from user where userId = '")
+    String login(String userId);
+
 }
