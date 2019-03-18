@@ -8,5 +8,5 @@ public interface IUserService {
 
     List<User> getAllUser();
 
-    String login(String userId);
+
 }

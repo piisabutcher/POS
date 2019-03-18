@@ -3,46 +3,44 @@ body,html{
     padding: 0px;
 }
 header{
-    padding: 1em 190px 1em;
-    letter-spacing: -1px;
-    text-align: center;
-}
-.header h1 {
-    color: #D5D6E2;
-    font-weight: bold;
-    font-size: 2em;
-    line-height: 1;
-    font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
-}
-.header h1 span {
-    font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
-    display: block;
-    font-size: 60%;
-    font-weight: 400;
-    padding: 0.8em 0 0 0;
-    color: #c3c8cd;
+    width: 100%;
+    height: 15rem;
+    background-color: #f4b50e;
 }
 #content{
-    border: 1px solid black;
-    width: 30%;
-    float: right;
-    margin-right: 3em;
+    border: 1px solid #6c757d;
+    width: 25em;
+    padding: 0px;
+    margin:0 auto;
+    margin-top: 2rem;
 }
 #content>ul{
     text-align: center;
     padding: 0;
+    border:0;
 }
 
 #content>ul>li{
     height: 3em;
     line-height: 3em;
     font-size: 1.2em;
-    color: white;
+    color: black;
     list-style: none;
     display: inline-block;
-    width: 49.5%;
-    background-color: green;
+    width: 50%;
+    background-color:#eeeeee;
     margin: 0;
+}
+/**
+tab悬浮，点击样式控制
+ */
+#content>ul>li:hover{
+    background-color:#f4b50e;
+    color: #ffffff;
+}
+.tabSwitch{
+    background-color:#f4b50e;
+    color: #ffffff;
 }
 #login{
     padding: 0.8em;
@@ -50,4 +48,12 @@ header{
 #login>form>input{
     margin-bottom: 0.6em;
     width: 100%;
+}
+footer{
+    width: 100%;
+    margin: 0 auto;
+    background-color: #eeeeee;
+    height: 8rem;
+    position: absolute;
+    bottom: 0px;
 }
