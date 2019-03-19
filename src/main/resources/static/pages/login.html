@@ -3,36 +3,62 @@
 <head>
     <meta charset="UTF-8" />
     <title>登录</title>
+    <!--css file-->
+    <link rel="stylesheet" type="text/css" href="../css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="../css/login.css" />
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 </head>
 <body>
-<header>
-</header>
-<div class="container-fluid">
+    <ul class="cb-slideshow">
+       <li><span>Image 01</span><div><h3>p·ea·ce·ful</h3></div></li>
+       <li><span>Image 02</span><div><h3>com·for·ta·ble</h3></div></li>
+       <li><span>Image 03</span><div><h3>bal·ance</h3></div></li>
+       <li><span>Image 04</span><div><h3>e·qua·nim·i·ty</h3></div></li>
+       <li><span>Image 05</span><div><h3>com·po·sure</h3></div></li>
+       <li><span>Image 06</span><div><h3>se·ren·i·ty</h3></div></li>
+    </ul>
     <div id="content">
         <ul>
             <li>登录</li><!--
          --><li>注册</li>
         </ul>
         <div id="login">
-            <form>
-                <input type="text" id="userId" class="form-control" placeholder="用户名">
-                <input type="password" id="password" class="form-control" placeholder="密码">
-                <input type="button" class="btn-primary form-control" value="马上登录">
-            </form>
+          <form autocomplete="off">
+              <input type="text" id="userId" placeholder="用户名">
+              <input type="password" id="password" placeholder="密码">
+              <input type="button" value="马上登录">
+          </form>
         </div>
-        <div id="register"></div>
-        
+        <div id="register">
+          <form id="registerForm">
+            <input type="text" id="rUsername" placeholder="用户名">
+            <input type="password" id="rPassword" placeholder="密码">
+            <input type="password" id="rrPassword" placeholder="确认密码">
+            <input type="tel" id="rTel" placeholder="联系电话">
+            <section id="rdo">
+              <label>性别</label><!--
+           --><div>
+                 <input id="male" type="radio" name="sex" checked>
+                 <label for="male"></label>
+                 <span>男</span>
+              </div><!--
+           --><div>
+                 <input id="female" type="radio" name="sex" placeholder="性别">
+                 <label for="female"></label>
+                 <span>女</span>
+              </div>
+            </section>
+            <input type="button" value="确认注册">
+          </form>
+        </div>  
     </div>
-</div>
-<footer>
 
-</footer>
-<!--css file-->
-<link rel="stylesheet" type="text/css" href="../css/login.css" />
-<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+
+
 <!--js file-->
-<script type="application/javascript" src="../js/jquery.min.js"></script>
-<script type="application/javascript" src="../js/login.js"></script>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/login.js"></script>
 </body>
 
 </html>
