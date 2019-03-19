@@ -16,7 +16,7 @@ public class PosApplication {
     public static void main(String[] args) {
         SpringApplication.run(PosApplication.class, args);
     }
-    @Bean(destroyMethod = "close", initMethod = "init")
+    @Bean()
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource druidDataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
