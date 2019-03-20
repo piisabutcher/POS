@@ -401,6 +401,9 @@ tab悬浮，点击样式控制
 #login,#register{
     padding: 0 0.8em 0.8em 0.8em;
 }
+#register{
+    display: none;
+}
 #login>form>input,#register>form>input{
     margin-top: 0.3em;
     margin-bottom: 0.3em;
@@ -430,8 +433,8 @@ tab悬浮，点击样式控制
     color: white;
 }
 #rdo{
-    height: 2.5rem;
-    margin-top: 0.3em;
+    height: 3.5rem;
+    margin-bottom: 0.5em;
 }
 #rdo>label{
     display: inline-block;
@@ -445,7 +448,7 @@ tab悬浮，点击样式控制
     position: relative;
     display: inline-block;
     width: 20%;
-    height: 3rem;
+    height: 2rem;
 }
 input[type="radio"]{
     width: 20px;

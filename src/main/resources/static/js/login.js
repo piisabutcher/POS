@@ -1,7 +1,4 @@
-//tab切换
-$("#content>ul>li:first").addClass('tabOn');
-$("#content>ul>li:last").addClass('tabOff');
-showOrHide($("#register"));
+//登录注册样式切换
 $("#content>ul>li").click(function () {
 	$(this).addClass("tabOn")
 	.removeClass("tabOff")
@@ -32,10 +29,9 @@ function showOrHide(o){
 			opacity:"show"
 		}, 400);
 }
-
 //登录
 $("#login>form>input[type=button]").click(function() {
-	console.log("尝试登录……");
+	console.log("login……");
 	$.ajax({
 		url: '/user/login',
 		type: 'post',
@@ -46,10 +42,16 @@ $("#login>form>input[type=button]").click(function() {
 			"password": $("#password").val()
 		}),
 		success:function(res){
-			location.pathname = "pages/index.html";
+			console.log(res);
+			if(res.code === 200){
+				window.location.pathname = "/pages/index.html";
+			}
+			else if(res.code === 401){
+				alert("密码错误！");
+			}
 		},
 		error:function(){
-		    alert("出错啦！");
+		    alert("服务器出错");
         }
 	});
 });
@@ -96,7 +98,7 @@ $('#registerForm input').keyup(function() {
         }
 	}
 });
-$('#registerForm input[type=button]').click(function(event) {
+$('#registerForm input[type=button]').click(function() {
 	var flag = false;
 	$(this)[0].disabled = false;
 	$(this).siblings('input').each(function(index, el) {
@@ -112,7 +114,31 @@ $('#registerForm input[type=button]').click(function(event) {
 		alert("表单存在尚未处理的错误！");
 	}
 	else{
-		console.log("注册成功！");
+		console.log("注册register……");
+		var gender = $('input:radio[name="sex"]:checked')=='男'?1:2;
+		$.ajax({
+			url: '/user/register',
+			type: 'post',
+			contentType:'application/json',
+			async: true,
+			data: JSON.stringify({
+				"userName": $("#rUsername").val(),
+				"password": $("#rPassword").val(),
+				"gender": gender,
+				"tel": $('#rTel').val(),
+				"power": 0
+			}),
+			success:function(res){
+				console.log(res);
+				if(res.code === 200){
+					window.location.pathname = "/pages/index.html";
+				}
+			},
+			error:function(){
+				alert("服务器出错");
+			}
+
+		});
 	}
 
 });
