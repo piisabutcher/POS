@@ -56,7 +56,7 @@ public class UserController {
     public Result<User> register(@RequestBody User user) throws Exception{
         try{
             System.out.println(user.getUserName());
-            user.setUserId(String.valueOf((int)(Math.random()*9+1)*100000));
+            user.setUserId(String.valueOf((int)(Math.random()*9+1)*100000));//自动生成id,待修改
             userService.save(user);
             return Result.success(user);
         }catch (Exception e){

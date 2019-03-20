@@ -60,9 +60,9 @@ $('#registerForm input').keyup(function() {
 	var pwdPattern = /^[0-9a-zA-Z]+$/;
 	var telPattern = /^[1][3,4,5,7,8][0-9]{9}$/;
 	if($(this).is('#rUsername')){
-		if(this.value.length<6 || this.value.length>16){
+		if(this.value.length<2 || this.value.length>16){
 			$('span').remove('.u1');
-			$(this).after('<span class="u1">WARN：请输入长度为6~16的用户名</span>');
+			$(this).after('<span class="u1">WARN：请输入长度为2~16的用户名</span>');
 		}else{
 			$('span').remove('.u1');
 		}
