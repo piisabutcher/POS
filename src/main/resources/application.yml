@@ -1,30 +1,21 @@
-#端口
-server:
+server: #端口
   port: 8080
 spring:
   datasource:
     name: pos
-    url: jdbc:mysql://localhost:3306/pos?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/pos?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-    # 使用druid数据源
-    type: com.alibaba.druid.pool.DruidDataSource
-    filters: stat
-    maxActive: 20
-    initialSize: 1
-    maxWait: 60000
-    minIdle: 1
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: select 'x'
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: true
-    maxOpenPreparedStatements: 20
-  #页面热加载
-  thymeleaf:
-    cache: false
-mybatis:
-  mapper-locations: classpath*:mybatis/mapper/*.xml
+
+  jpa: #JPA持久化配置
+    database: MySQL #指定数据库类型
+    show-sql: true #在日志中显示SQL语句
+    hibernate:
+      ddl-auto: update #自动创建、更新数据表结构等配置，
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect #数据库方言
+
+
+
