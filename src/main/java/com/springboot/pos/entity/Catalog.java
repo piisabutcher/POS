@@ -1,9 +1,7 @@
 package com.springboot.pos.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,7 +20,7 @@ public class Catalog {
     }
 
     @Basic
-    @Column(name = "catalog_name", nullable = false, length = 255)
+    @Column(name = "catalog_name", nullable = false, length = 254)
     public String getCatalogName() {
         return catalogName;
     }
@@ -44,4 +42,9 @@ public class Catalog {
     public int hashCode() {
         return Objects.hash(catalogId, catalogName);
     }
+
+    //一对多
+    @OneToMany(mappedBy = "catalog",cascade = CascadeType.ALL)
+    private List<Food> foodList;
+
 }
