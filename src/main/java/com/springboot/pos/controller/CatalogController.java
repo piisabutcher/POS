@@ -20,12 +20,10 @@ public class CatalogController {
     //显示所有菜品类别
     @RequestMapping("/getAllCatalog")
     @ResponseBody
-    private Iterable<Catalog> getAllCatalog(){
+    private Result getAllCatalog(){
         Iterable<Catalog> it = catalogService.getAllCatalog();
-        System.out.println(it.iterator().next().getCatalogName());
-        return it;
+        return Result.success(it);
     }
-
     //按菜品类别编号查询
     @RequestMapping("/getCatalogById")
     @ResponseBody
@@ -45,7 +43,7 @@ public class CatalogController {
     //按菜品类别名称查询
     @RequestMapping("/getCatalogByName")
     @ResponseBody
-    public Iterable<Catalog> getCatalogByName(@RequestParam("cname") String catalogName) throws Exception{
+    public Iterable<Catalog> getCatalogByName(@RequestParam("ctlName") String catalogName) throws Exception{
         try{
             Iterable<Catalog> catalog = catalogService.getCatalogByCName(catalogName);
             if(catalog == null)
@@ -74,16 +72,14 @@ public class CatalogController {
     //修改菜品类别名称
     @RequestMapping("/updateCatalog")
     @ResponseBody
-    public Result<Catalog> updateCatalog(@RequestBody Catalog catalog,
-                                         @RequestParam("newName") String newCatalogName) throws Exception{
+    public Result<Catalog> updateCatalog(@RequestBody Catalog catalog) throws Exception{
         try{
-            if(catalogService.getCatalogByName(newCatalogName) != null)
-                return Result.error(222);
+            if(catalogService.getCatalogByName(catalog.getCatalogName()) == null)
+                return Result.error(204);
             String catalogId = catalog.getCatalogId();
             if(catalogId != null) {
-                catalogService.updateCatalog(catalogId, newCatalogName);
-                Catalog c = new Catalog(catalogId, newCatalogName);
-                return Result.success(c);
+                Catalog ctl = catalogService.updateCatalog(catalogId, catalog.getCatalogName());
+                return Result.success(ctl);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -95,16 +91,16 @@ public class CatalogController {
     //增加菜品类别
     @RequestMapping("/saveCatalog")
     @ResponseBody
-    public Result<Catalog> saveCatalog(@RequestParam("cname")String catalogName) throws Exception{
+    public Result<Catalog> saveCatalog(@RequestParam("ctlName")String catalogName) throws Exception{
         try{
             if(catalogService.getCatalogByName(catalogName) == null){
                 Catalog catalog = new Catalog();
-                catalog.setCatalogId(String.valueOf((int)(Math.random()*9+1)*100000));//同userId
+                catalog.setCatalogId("H");//同userId
                 catalog.setCatalogName(catalogName);
                 catalogService.saveCatalog(catalog);
                 return Result.success(catalog);
             }
-            return Result.error(222);//该类别已存在
+            return Result.error(204);//该类别已存在
         }catch (Exception e){
             e.printStackTrace();
             return Result.error(500);

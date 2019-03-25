@@ -2,6 +2,10 @@ package com.springboot.pos.controller;
 
 import com.springboot.pos.service.UserService;
 import com.springboot.pos.util.Result;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.springboot.pos.entity.User;
@@ -42,8 +46,6 @@ public class UserController {
         }catch (Exception e){
             return Result.error(500);
         }
-
-
     }
 
     /**
@@ -67,12 +69,23 @@ public class UserController {
 
     }
 
-    @RequestMapping("/getAllUser")
+    /**
+     * 分页获取用户列表
+     * @param page
+     * @param size
+     * @return
+     */
+    @RequestMapping("/getUserList")
     @ResponseBody
-    private Iterable<User> getAllUser(){
-        Iterable<User> it = userService.getAllUser();
-        System.out.println(it.iterator().next().getUserName());
-        return it;
+    private Result<User> getUserList(
+            @RequestParam("page")int page,
+            @RequestParam("size")int size){
+        page = page<0?0:page;
+        Sort sort = new Sort(Sort.DEFAULT_DIRECTION,"userId");
+        Pageable pageable = PageRequest.of(page,size,sort);
+        Page<User> it = userService.getAllUser(pageable);
+        return Result.success(it);
     }
+
 
 }

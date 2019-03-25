@@ -55,7 +55,7 @@ $("#login>form>input[type=button]").click(function() {
         }
 	});
 });
-//注册表单验证
+//注册表单验证及提交
 $('#registerForm input').keyup(function() {
 	var pwdPattern = /^[0-9a-zA-Z]+$/;
 	var telPattern = /^[1][3,4,5,7,8][0-9]{9}$/;
@@ -140,5 +140,17 @@ $('#registerForm input[type=button]').click(function() {
 
 		});
 	}
-
 });
+/**
+ * 实现离线缓存
+ */
+//判断浏览器是否支持离线缓存
+$(document).ready(function() {
+	if(window.applicationCache){
+		console.log("支持离线缓存");
+	}
+	else{
+		console.log("不支持离线缓存")
+	}
+});
+

@@ -2,9 +2,14 @@ package com.springboot.pos.controller;
 
 import com.springboot.pos.entity.Catalog;
 import com.springboot.pos.entity.Food;
+import com.springboot.pos.service.CatalogService;
 import com.springboot.pos.service.FoodService;
+import com.springboot.pos.util.Result;
+import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -14,74 +19,62 @@ import javax.annotation.Resource;
 public class FoodController {
     @Resource
     private FoodService foodService;
+    @Resource
+    private CatalogService catalogService;
 
     @RequestMapping("/getAllFood")
     @ResponseBody
-    private Iterable<Food> getAllFood(){
+    private Result<Food> getAllFood(){
         Iterable<Food> it = foodService.getAllFood();
-        System.out.println(it.iterator().next().getFoodName());
-        return it;
+        return Result.success(it);
     }
 
     @RequestMapping("/getFoodById")
     @ResponseBody
-    private Food getFoodById(String foodId){
+    private Result<Food> getFoodById(@RequestParam("foodId")String foodId){
         Food f = foodService.getFoodByFoodId(foodId);
-        return f;
+        return Result.success(f);
     }
-    @RequestMapping("/save")
+    @RequestMapping("/saveFood")
     @ResponseBody
-    private Food save(String food_id,String food_name,String image,double price,String sup_period,
-                      String catalog_id){
-        Food food = new Food();
-        food.setFoodId(food_id);
-        food.setFoodName(food_name);
-        food.setImage(image);
-        food.setPrice(price);
-        food.setSupPeriod(sup_period);
-        Catalog catalog = new Catalog();
-        catalog.setCatalogId(catalog_id);
-        catalog.setCatalogName("2");
-        food.setCatalog(catalog);
-        Food fo = foodService.save(food);
-        return fo;
+    private Result<Food> save(@RequestBody Food food){
+        System.out.println(JSONObject.fromObject(food));
+        food.setCatalog(catalogService.getCatalogById(food.getCatalog().getCatalogId()));
+        Food f = foodService.save(food);
+        return Result.success(f);
     }
 
-    @RequestMapping("/update")
+    @RequestMapping("/updateFood")
     @ResponseBody
-    private Food update(String food_id,String food_name,String image,double price,String sup_period,
-                      String catalog_id){
-        Food food = new Food();
-        food.setFoodId(food_id);
-        food.setFoodName(food_name);
-        food.setImage(image);
-        food.setPrice(price);
-        food.setSupPeriod(sup_period);
-        Catalog catalog = new Catalog();
-        catalog.setCatalogId(catalog_id);
-        catalog.setCatalogName("2");
-        food.setCatalog(catalog);
-        Food fo = foodService.update(food);
-        return fo;
+    private Result<Food> update(@RequestBody Food food){
+        Food oldFood = foodService.getFoodByFoodId(food.getFoodId());
+        if(oldFood == null){
+            return Result.error(500);
+        }else {
+            Food f = foodService.update(food);
+            return Result.success(f);
+        }
     }
 
     @RequestMapping("/getFoodByName")
     @ResponseBody
-    private Food getFoodByName(String food_name){
-        Food food = foodService.getFoodByName(food_name);
-        return food;
+    private Result<Food> getFoodByName(@RequestParam("foodName") String foodName){
+        Food f = foodService.getFoodByName(foodName);
+        return Result.success(f);
     }
+
 
     @RequestMapping("/getFoodByCName")
     @ResponseBody
-    private Iterable<Food> getFoodByCName(String food_name){
-        Iterable<Food> food = foodService.getFoodByCName(food_name);
-        return food;
+    private Result getFoodByCName(@RequestParam("foodName") String foodName){
+        Iterable<Food> it = foodService.getFoodByCName(foodName);
+        return Result.success(it);
     }
 
-    @RequestMapping("/delete")
+    @RequestMapping("/deleteByFoodId")
     @ResponseBody
-    private void delete(String food_id){
-        foodService.delete(food_id);
+    private Result deleteByFoodId(@RequestParam("foodId") String foodId){
+        foodService.delete(foodId);
+        return Result.success(null);
     }
 }

@@ -2,6 +2,8 @@ package com.springboot.pos.service;
 
 import com.springboot.pos.entity.User;
 import com.springboot.pos.reposity.UserReposity;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
@@ -29,10 +31,9 @@ public class UserService {
      * @return 对象列表
      */
     @Transactional
-    public Iterable<User> getAllUser(){
-        return userReposity.findAll();
+    public Page<User> getAllUser(Pageable pageable){
+        return userReposity.findAll(pageable);
     }
-
     /**
      * 修改用户数据，持久化对象修改自动更新到数据库
      * @param user
@@ -52,6 +53,7 @@ public class UserService {
         //异常处理
         return user.isPresent()?user.get():null;
     }
+
 
 
 

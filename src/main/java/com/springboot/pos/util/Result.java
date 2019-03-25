@@ -8,7 +8,7 @@ public class Result<T> implements Serializable {
     private boolean isSuccess;
     private String msg;
     private T data;
-    private List<T> dataList;
+    private Iterable<T> dataList;
 
     /**
      * 无参构造器
@@ -45,7 +45,7 @@ public class Result<T> implements Serializable {
      * @param dataList
      * @param isSuccess
      */
-    public Result(int code, String msg, List<T> dataList, boolean isSuccess){
+    public Result(int code, String msg, Iterable<T> dataList, boolean isSuccess){
         this(code, isSuccess, msg);
         this.setDataList(dataList);
     }
@@ -62,7 +62,7 @@ public class Result<T> implements Serializable {
      * 请求数据成功
      * @param dataList
      */
-    public static<T> Result<T> success(List<T> dataList){
+    public static<T> Result<T> success(Iterable<T> dataList){
         return new Result<T>(200, "OK", dataList, true);
     }
 
@@ -104,11 +104,11 @@ public class Result<T> implements Serializable {
         this.data = data;
     }
 
-    public List<T> getDataList() {
+    public Iterable<T> getDataList() {
         return dataList;
     }
 
-    public void setDataList(List<T> dataList) {
+    public void setDataList(Iterable<T> dataList) {
         this.dataList = dataList;
     }
 

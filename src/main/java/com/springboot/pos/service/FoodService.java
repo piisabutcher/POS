@@ -12,6 +12,7 @@ import java.util.Optional;
 public class FoodService {
     @Resource
     private FoodReposity foodReposity;
+    @Resource
 
     //增加菜品
     @Transactional
@@ -26,12 +27,16 @@ public class FoodService {
     //更新菜品信息
     @Transactional
     public Food update(Food food){
-        Optional<Food> fd = foodReposity.findById(food.getFoodId());
-        if(fd.isPresent()) {
-            foodReposity.deleteById(food.getFoodId());
-            return foodReposity.save(food);
+        Food fd = this.getFoodByFoodId(food.getFoodId());
+        if(fd == null) return null;
+        else {
+            if(food.getFoodName()!=null) fd.setFoodName(food.getFoodName());
+            if(food.getCatalog()!=null) fd.setCatalog(food.getCatalog());
+            if(food.getSupPeriod()!=null) fd.setSupPeriod(food.getSupPeriod());
+            if(food.getPrice()!=null) fd.setPrice(food.getPrice());
+            if(food.getImage()!=null) fd.setImage(food.getImage());
+            return fd;
         }
-        return food;
     }
 
     //通过id查询菜品信息

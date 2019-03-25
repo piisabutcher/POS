@@ -10,7 +10,7 @@ public class Catalog {
     private String catalogName;
 
     @Id
-    @Column(name = "catalog_id", nullable = false, length = 20)
+    @Column(name = "catalog_id", nullable = false, length = 5)
     public String getCatalogId() {
         return catalogId;
     }
@@ -20,7 +20,7 @@ public class Catalog {
     }
 
     @Basic
-    @Column(name = "catalog_name", nullable = false, length = 254)
+    @Column(name = "catalog_name", nullable = false, length = 255)
     public String getCatalogName() {
         return catalogName;
     }
