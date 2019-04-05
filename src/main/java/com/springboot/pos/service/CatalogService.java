@@ -60,4 +60,10 @@ public class CatalogService {
     public Catalog saveCatalog(Catalog catalog){
         return catalogReposity.save(catalog);
     }
+
+    //截取id
+    @Transactional
+    public String generateId(){
+        return catalogReposity.generateId();
+    }
 }

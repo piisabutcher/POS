@@ -13,7 +13,7 @@ public class Food {
     private Catalog catalog;//所属菜品
 
     @Id
-    @Column(name = "food_id", nullable = false, length = 20)
+    @Column(name = "food_id", nullable = false, length = 12)
     public String getFoodId(){ return this.foodId; }
 
     public void setFoodId(String foodId){ this.foodId = foodId; }

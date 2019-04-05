@@ -12,7 +12,6 @@ import java.util.Optional;
 public class FoodService {
     @Resource
     private FoodReposity foodReposity;
-    @Resource
 
     //增加菜品
     @Transactional
@@ -63,5 +62,11 @@ public class FoodService {
     @Transactional
     public void delete(String foodid){
         foodReposity.deleteById(foodid);
+    }
+
+    //截取id
+    @Transactional
+    public String generateId(String catalogId){
+        return foodReposity.generateId(catalogId);
     }
 }

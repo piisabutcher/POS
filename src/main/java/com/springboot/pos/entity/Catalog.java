@@ -8,9 +8,10 @@ import java.util.Objects;
 public class Catalog {
     private String catalogId;
     private String catalogName;
+    private String catalogImg;//新增菜品类别图片字段
 
     @Id
-    @Column(name = "catalog_id", nullable = false, length = 5)
+    @Column(name = "catalog_id", nullable = false, length = 7)
     public String getCatalogId() {
         return catalogId;
     }
@@ -29,13 +30,24 @@ public class Catalog {
         this.catalogName = catalogName;
     }
 
+    @Basic
+    @Column(name = "catalog_img", nullable = false, length = 255)
+    public String getCatalogImg(){
+        return catalogImg;
+    }
+
+    public void setCatalogImg(String catalogImg){
+        this.catalogImg = catalogImg;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Catalog catalog = (Catalog) o;
         return Objects.equals(catalogId, catalog.catalogId) &&
-                Objects.equals(catalogName, catalog.catalogName);
+                Objects.equals(catalogName, catalog.catalogName)&&
+                Objects.equals(catalogImg,catalog.catalogImg);
     }
 
     @Override

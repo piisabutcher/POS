@@ -22,4 +22,8 @@ public interface CatalogReposity extends JpaRepository<Catalog,String> {
     @Modifying
     Catalog updateCatalog(@Param("cname") String name,@Param("cid")String cid);
 
+    //截取id
+    @Query(value = "SELECT max(LEFT(catalog_id , 1)) from catalog",nativeQuery = true)
+    String generateId();
+
 }
