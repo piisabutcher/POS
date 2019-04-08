@@ -87,5 +87,56 @@ public class UserController {
         return Result.success(it);
     }
 
+    /**
+     *按id查询用户
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/getUserById")
+    @ResponseBody
+    private Result<User> getFoodById(@RequestParam("userId")String userId){
+        User u = userService.getUserByUserId(userId);
+        return Result.success(u);
+    }
 
+    /**
+     *按用户名称模糊查询
+     * @param userName
+     * @return
+     */
+    @RequestMapping("/getUserByCName")
+    @ResponseBody
+    private Result getUserByCName(@RequestParam("userName") String userName){
+        Iterable<User> it = userService.getUserByCName(userName);
+        return Result.success(it);
+    }
+
+    /**
+     *修改用户信息
+     * @param user
+     * @return
+     */
+    @RequestMapping("/updateUser")
+    @ResponseBody
+    public Result<User> updateUser(@RequestBody User user){
+        User oldUser = userService.getUserByUserId(user.getUserId());
+        if(oldUser == null){
+            return Result.error(500);
+        }else {
+            User u = userService.update(user);
+            return Result.success(u);
+        }
+    }
+
+    /**
+     * 删除用户
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/deleteByUserId")
+    @ResponseBody
+    private Result deleteByFoodId(@RequestParam("userId") String userId){
+        userService.deleteUser(userId);
+        return Result.success(null);
+    }
 }

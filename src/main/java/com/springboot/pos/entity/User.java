@@ -10,7 +10,6 @@ public class User {
     private String userName;
     private int gender;
     private String tel;
-    private int power;
 
     @Id
     @Column(name = "userId", nullable = false, length = 20)
@@ -62,23 +61,12 @@ public class User {
         this.tel = tel;
     }
 
-    @Basic
-    @Column(name = "power", nullable = false)
-    public int getPower() {
-        return power;
-    }
-
-    public void setPower(int power) {
-        this.power = power;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return gender == user.gender &&
-                power == user.power &&
                 Objects.equals(userId, user.userId) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(userName, user.userName) &&
@@ -87,6 +75,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, password, userName, gender, tel, power);
+        return Objects.hash(userId, password, userName, gender, tel);
     }
 }
