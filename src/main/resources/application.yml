@@ -5,7 +5,7 @@ spring:
     name: pos
     url: jdbc:mysql://localhost:3306/pos?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
     username: root
-    password: 123456
+    password: tgf6280159
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa: #JPA持久化配置
@@ -16,6 +16,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect #数据库方言
-
+  aop:
+    proxy-target-class: true
 
 

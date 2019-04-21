@@ -75,6 +75,9 @@ public class Result<T> implements Serializable {
             case 204: return new Result<T>(204,false,"未获取到内容");
             case 401: return new Result<T>(401,false,"没有权限的用户");
             case 500: return new Result<T>(500,false,"服务器异常");
+            case 501: return new Result<T>(501,false,"餐桌已满，请稍后");
+            case 502: return new Result<T>(502,false,"该菜品已经上菜");
+            case 503: return new Result<T>(5023,false,"超过该桌子最大用餐人数，请更换桌子");
             default: return new Result<T>(500,false,"服务器异常");
         }
     }

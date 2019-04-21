@@ -1,6 +1,6 @@
 package com.springboot.pos.controller;
 
-import com.springboot.pos.service.UserService;
+import com.springboot.pos.service.impl.UserService;
 import com.springboot.pos.util.Result;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -136,7 +136,7 @@ public class UserController {
     @RequestMapping("/deleteByUserId")
     @ResponseBody
     private Result deleteByFoodId(@RequestParam("userId") String userId){
-        userService.deleteUser(userId);
+        userService.deleteUser(userService.getUserByUserId(userId));
         return Result.success(null);
     }
 }

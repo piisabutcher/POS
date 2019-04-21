@@ -1,9 +1,8 @@
 package com.springboot.pos.controller;
 
-import com.springboot.pos.entity.Catalog;
 import com.springboot.pos.entity.Food;
-import com.springboot.pos.service.CatalogService;
-import com.springboot.pos.service.FoodService;
+import com.springboot.pos.service.impl.CatalogService;
+import com.springboot.pos.service.impl.FoodService;
 import com.springboot.pos.util.Result;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;

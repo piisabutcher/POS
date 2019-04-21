@@ -2,9 +2,13 @@ package com.springboot.pos.entity;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class Food {
+public class Food implements Serializable {
+    private static final long serialVersionUID = 6788933059497808914L;
     private String foodId;//菜品编号
     private String foodName;//菜名
     private Double price;//价格
@@ -12,8 +16,11 @@ public class Food {
     private String image;
     private Catalog catalog;//所属菜品
 
+    @OneToMany(mappedBy="food")
+    List<SaleLineItem> saleLineItems =new ArrayList<SaleLineItem> ();
+
     @Id
-    @Column(name = "food_id", nullable = false, length = 12)
+    @Column(name = "food_id", nullable = false, length = 20)
     public String getFoodId(){ return this.foodId; }
 
     public void setFoodId(String foodId){ this.foodId = foodId; }
@@ -66,7 +73,5 @@ public class Food {
     public void setCatalog(Catalog catalog){
         this.catalog = catalog;
     }
-
-
 
 }

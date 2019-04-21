@@ -1,27 +1,29 @@
-package com.springboot.pos.service;
+package com.springboot.pos.service.impl;
 
 
+import com.springboot.pos.dao.IFoodDAO;
 import com.springboot.pos.entity.Food;
 import com.springboot.pos.reposity.FoodReposity;
+import com.springboot.pos.service.IFoodService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service("foodService")
-public class FoodService {
+public class FoodService implements IFoodService {
     @Resource
-    private FoodReposity foodReposity;
+    private IFoodDAO iFoodDAO;
 
     //增加菜品
     @Transactional
     public Food save(Food food){
-        return foodReposity.save(food);
+        return iFoodDAO.save(food);
     }
 
     //列出所有菜品
     @Transactional
-    public Iterable<Food> getAllFood(){return foodReposity.findAll();}
+    public Iterable<Food> getAllFood(){return iFoodDAO.findAll();}
 
     //更新菜品信息
     @Transactional
@@ -41,32 +43,32 @@ public class FoodService {
     //通过id查询菜品信息
     @Transactional
     public Food getFoodByFoodId(String foodId){
-        Optional<Food> food = foodReposity.findById(foodId);
+        Optional<Food> fd = iFoodDAO.findById(foodId);
         //异常处理
-        return food.isPresent()?food.get():null;
+        return fd.isPresent()?fd.get():null;
     }
 
     //通过菜名查询菜品信息
     @Transactional
     public Food getFoodByName(String food_name){
-        Food food = foodReposity.findByName(food_name);
+        Food food = iFoodDAO.findByName(food_name);
         return (food != null)?food:null;
     }
 
     //通过菜名模糊查询菜品信息
     public Iterable<Food> getFoodByCName(String food_name){
-        Iterable<Food> food = foodReposity.findByCName(food_name);
+        Iterable<Food> food = iFoodDAO.findByCName(food_name);
         return (food != null)?food:null;
     }
     //通过菜品id删除菜品
     @Transactional
     public void delete(String foodid){
-        foodReposity.deleteById(foodid);
+        iFoodDAO.deleteById(foodid);
     }
 
     //截取id
     @Transactional
     public String generateId(String catalogId){
-        return foodReposity.generateId(catalogId);
+        return iFoodDAO.generateId(catalogId);
     }
 }
