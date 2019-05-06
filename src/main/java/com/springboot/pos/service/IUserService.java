@@ -14,4 +14,6 @@ public interface IUserService {
     void deleteUser(User user);
 
     User getUserByUserId(String userId);
+
+    public Iterable<User> getUserByCName(String user_name);
 }

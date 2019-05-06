@@ -182,4 +182,31 @@ public class SaleController {
         Iterable<Sale> sales = saleService.displayAllSale();
         return Result.success(sales);
     }
+
+    /**
+     * 显示所有未付款订单
+     * @return
+     */
+    @RequestMapping("/displayAllUncompleteSale ")
+    @ResponseBody
+    public Result<Sale> displayAllUncompleteSale(){
+        Iterable<Sale> sales = saleService.displayAllUncompleteSale();
+        return Result.success(sales);
+    }
+
+    /**
+     * 支付订单
+     * @param payment
+     * @return
+     */
+    @RequestMapping("/paySale ")
+    @ResponseBody
+    public Result<Sale> paySale(Payment payment){
+        int i = saleService.paySale(payment);
+        if(i == 0)
+            return Result.error(504);
+        else
+            return Result.success(payment.getSale());
+    }
+
 }

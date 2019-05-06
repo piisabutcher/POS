@@ -69,4 +69,8 @@ public class UserService implements IUserService{
         return user.isPresent()?user.get():null;
     }
 
+    public Iterable<User> getUserByCName(String user_name){
+        Iterable<User> users = IuserDao.findByCName(user_name);
+        return (users != null)?users:null;
+    }
 }

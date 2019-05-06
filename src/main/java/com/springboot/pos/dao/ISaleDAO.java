@@ -12,4 +12,8 @@ public interface ISaleDAO extends SaleReposity {
     //查询所有
     @Query(value = "select * from sale", nativeQuery = true)
     Iterable<Sale> displayAllSale();
+
+    //查询所有没有支付的订单
+    @Query(value = "select * from sale where is_complete = 0", nativeQuery = true)
+    Iterable<Sale> displayAllUncompleteSale();
 }
