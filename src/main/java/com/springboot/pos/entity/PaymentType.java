@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class PaymentType implements Serializable {
     private static final long serialVersionUID = 6788933059497808914L;
-    private String ptId;//1代表现金，2代表支付宝/微信，3代表银联
+    private String ptId;//1代表现金，2代表支付宝/微信，3代表信用卡
     private String ptName;
 
     @Id

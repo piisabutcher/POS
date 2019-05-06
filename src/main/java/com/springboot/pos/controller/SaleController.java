@@ -47,12 +47,15 @@ public class SaleController {
     @ResponseBody
     public Result<DiningTable> exchangeDiningTable(@RequestBody DiningTable diningTable){
         //把原有餐桌设为无人状态
-        currentSale.getDiningTable().setIs_people(0);
+        diningTableService.findById(currentSale.getDiningTable().getDt_Id()).setIs_people(0);
         //把现有餐桌设为有人状态
-        diningTable.setIs_people(1);
-        currentSale.setDiningTable(diningTable);
+        diningTableService.findById(diningTable.getDt_Id()).setIs_people(1);
+
+        saleService.getSaleById(currentSale.getSaleId()).setDiningTable(diningTable);
+        currentSale = saleService.getSaleById(currentSale.getSaleId());
         return Result.success(diningTable);
     }
+
 
     /**
      * 增加就餐人数
@@ -66,7 +69,8 @@ public class SaleController {
         if(dt_num - currentSale.getDinners_num() < num){
             return Result.error(503);
         }
-        currentSale.setDinners_num(currentSale.getDinners_num() + num);
+        saleService.getSaleById(currentSale.getSaleId()).setDinners_num(currentSale.getDinners_num() + num);
+        currentSale = saleService.getSaleById(currentSale.getSaleId());
         return Result.success(currentSale);
     }
 
@@ -79,11 +83,12 @@ public class SaleController {
     @RequestMapping("/makeNewSale")
     @ResponseBody
     private Result<Sale> makeNewSale(@RequestBody Sale sale, @RequestBody List<SaleLineItem> saleLineItemList){
-        currentSale = saleService.getSaleById(sale.getSaleId());
-        DiningTable diningTable = currentSale.getDiningTable();
+        DiningTable diningTable = diningTableService.findById(sale.getDiningTable().getDt_Id());
         //把餐台设为有人状态
         diningTable.setIs_people(1);
-        saleService.saveSale(currentSale);
+        //保存订单到数据库
+        saleService.saveSale(sale);
+        currentSale = saleService.getSaleById(sale.getSaleId());
         //订单号
         String sale_id = currentSale.getSaleId();
 
@@ -132,6 +137,7 @@ public class SaleController {
     @ResponseBody
     public void addSli(@RequestBody List<SaleLineItem> saleLineItems){
         Iterable<SaleLineItem> slis = saleLineItemService.displaySli(currentSale.getSaleId());
+        Sale sale = saleService.getSaleById(currentSale.getSaleId());
         int i = 0;//判断订单里是否已经有这个菜品
         for (SaleLineItem sli:saleLineItems) {
             for(SaleLineItem sli2:slis){
@@ -140,7 +146,7 @@ public class SaleController {
                     sli2.setSli_num(sli2.getSli_num() + sli.getSli_num());
                     //修改为未出菜状态
                     sli2.setIs_export(0);
-                    currentSale.setTotal_amt(currentSale.getTotal_amt() + sli.getFood().getPrice() * sli.getSli_num());
+                    sale.setTotal_amt(sale.getTotal_amt() + sli.getFood().getPrice() * sli.getSli_num());
                     i = 1;
                 }
             }
@@ -148,10 +154,11 @@ public class SaleController {
                 int x = saleLineItemService.countSli(currentSale.getSaleId()) + 1;
                 sli.setSli_id(currentSale.getSaleId() + x);
                 saleLineItemService.saveSlt(sli);
-                currentSale.setTotal_amt(currentSale.getTotal_amt() + sli.getFood().getPrice() * sli.getSli_num());
+                sale.setTotal_amt(sale.getTotal_amt() + sli.getFood().getPrice() * sli.getSli_num());
             }
             i = 0;
         }
+        currentSale = saleService.getSaleById(sale.getSaleId());
     }
 
     /**
@@ -166,7 +173,10 @@ public class SaleController {
             return Result.error(502);
         }
         saleLineItemService.deleteSlt(saleLineItem);
-        currentSale.setTotal_amt(currentSale.getTotal_amt() - saleLineItem.getFood().getPrice() * saleLineItem.getSli_num());
+        //更新总额
+        saleService.getSaleById(currentSale.getSaleId()).setTotal_amt(currentSale.getTotal_amt() - saleLineItem.getFood().getPrice() * saleLineItem.getSli_num());
+        //更新currentSale
+        currentSale = saleService.getSaleById(currentSale.getSaleId());
         return Result.success(saleLineItem);
     }
 
@@ -176,7 +186,7 @@ public class SaleController {
      * 显示所有订单
      * @return
      */
-    @RequestMapping("/displayAllSale ")
+    @RequestMapping("/displayAllSale")
     @ResponseBody
     public Result<Sale> displayAllSale(){
         Iterable<Sale> sales = saleService.displayAllSale();
@@ -187,7 +197,7 @@ public class SaleController {
      * 显示所有未付款订单
      * @return
      */
-    @RequestMapping("/displayAllUncompleteSale ")
+    @RequestMapping("/displayAllUncompleteSale")
     @ResponseBody
     public Result<Sale> displayAllUncompleteSale(){
         Iterable<Sale> sales = saleService.displayAllUncompleteSale();
@@ -196,17 +206,39 @@ public class SaleController {
 
     /**
      * 支付订单
-     * @param payment
+     * @param pt_id
+     * @param pay_num
      * @return
      */
-    @RequestMapping("/paySale ")
+    @RequestMapping("/paySale")
     @ResponseBody
-    public Result<Sale> paySale(Payment payment){
-        int i = saleService.paySale(payment);
-        if(i == 0)
-            return Result.error(504);
+    public Result<Payment> paySale(@RequestParam("pt_id") String pt_id,@RequestParam("pay_num") double pay_num){
+        Payment payment = saleService.paySale(pt_id,pay_num,currentSale);
+        if(payment == null)
+            return Result.error(500);
         else
-            return Result.success(payment.getSale());
+            return Result.success(payment);
     }
 
+    /**
+     * 切换订单sale
+     * @param sale_id
+     * @return
+     */
+    @RequestMapping("/exchangeSaleById")
+    @ResponseBody
+    public Result<Sale> exchangeSaleById(@RequestParam("sale_id") String sale_id){
+        currentSale = saleService.getSaleById(sale_id);
+        return Result.success(currentSale);
+    }
+
+    /**
+     * 查询当前订单
+     * @return
+     */
+    @RequestMapping("/getSale")
+    @ResponseBody
+    public Result<Sale> getSale(){
+        return Result.success(currentSale);
+    }
 }
