@@ -1,0 +1,762 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+#container {
+    height: 100%;
+    width: 100%;
+    background-color: #f5f5f5;
+    position: relative;
+}
+
+#topNav {
+    height: 50px;
+    padding: 10px;
+    background-color: #313236;
+}
+
+#content {
+    width: 100%;
+    height: calc(100% - 70px);
+}
+
+#right {
+    width: 70%;
+    height: 93%;
+    display: inline-block;
+    position: relative;
+}
+
+#left {
+    display: inline-block;
+    width: 30%;
+    float: left;
+    height: 93%;
+
+}
+
+#bottom {
+    width: 100%;
+    height: 7%;
+    background-color: #fdfdfd;
+    position: absolute;
+    bottom: 0px;
+    border-top: 1px solid #dfdfdf;
+}
+
+
+
+
+#order { /**右边订单**/
+    width: calc(100% - 2px);
+    height: 100%;
+    background-color: #fdfdfd;
+    border: 1px solid #dfdfdf;
+    position: relative;
+}
+
+
+
+#order > div > div > label { /**客单**/
+    font-size: 24px;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+#order > div > div:last-child > span {
+    display: inline-block;
+    padding: 0 5px;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+#order > div > div > span:nth-child(2) {
+    float: right;
+}
+
+#saleItem { /**订单项**/
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    overflow: auto;
+}
+
+/**订单表单元格修饰**/
+#saleItem th {
+
+}
+
+#saleItem td {
+    border-bottom: 1px solid #e2e2e2;
+    padding: 10px 0;
+}
+
+#saleItem td input {
+    width: 35px;
+    border-radius: 3px;
+}
+
+#totalPrice { /**合计项**/
+    position: absolute;
+    bottom: 0;
+    width: 93%;
+    border-top: 1px solid #e0e0e0;
+    right: 0;
+    text-align: right;
+}
+
+#totalPrice > span:first-child {
+    float: left;
+}
+
+#saleNum {
+    color: #af0d10;
+}
+
+#saleItem tr td:last-child {
+    color: #af0d10;
+}
+
+#saleItem tr td i {
+    font-size: 20px;
+}
+
+#saleItem tr td i:hover {
+    color: #af0d10;
+    cursor: pointer;
+}
+
+#saleItem tr td div:last-child {
+    color: #af0d10;
+}
+
+/*左边底部按钮*/
+#leftBt {
+    width: 30%;
+    height: 100%;
+    text-align: right;
+    display: inline-block;
+}
+
+#leftBt i, #rightBt i {
+    margin-right: 10px;
+}
+
+#leftBt button {
+    margin: 10px;
+    width: 100px;
+    height: calc(100% - 20px);
+    background-color: #fbfbfb;
+    border: 1px solid #e0e0e0;
+    color: #555555;
+}
+
+#leftBt button:hover {
+    cursor: pointer;
+    color: #af0d10;
+    border: 1px solid #af0d10;
+}
+
+/*右边底部按钮*/
+#rightBt {
+    display: inline-block;
+    text-align: right;
+}
+
+#rightBt button {
+    margin: 0px 20px;
+    background-color: #af0d10;
+    color: white;
+    border: 0px;
+    padding: 5px 20px;
+    border-radius: 3px;
+}
+
+#rightBt button:hover {
+    cursor: pointer;
+}
+
+#rightBt button:after { /*待完善*/
+    content: "";
+    border-color: #af0d10;
+    border-right: 0px;
+    border-left: 10px;
+
+}
+
+/**菜单选择区**/
+#left-right {
+    display: inline-block;
+    height: 100%;
+    width: 88%;
+}
+
+/*菜品+搜索*/
+#left-right > div:first-child {
+    border: 1px solid #dfdfdf;
+    padding: 10px;
+    width: auto;
+    background-color: #fbfbfb;
+    border-bottom: 0px;
+    height: 50px;
+}
+
+#left-right > div:first-child > label {
+    display: inline-block;
+    margin: 10px;
+    margin-right: 20px;
+    font-size: 20px;
+}
+
+#left-bar {
+    display: inline-block;
+    width: 12%;
+    height: 100%;
+    float: left;
+    background-color: #fdfdfd
+}
+
+#left-bar > ul {
+    margin-top: 70px;
+    width: 100%;
+}
+
+#left-bar > ul > li {
+    text-align: center;
+    margin-top: 10px;
+    background-color: #dfdfdf;
+    min-height: 50px;
+    height: auto;
+    line-height: 50px;
+}
+
+#left-bar > ul > li:hover {
+    background-color: #313236;
+    color: white;
+    cursor: pointer;
+}
+
+/*搜索框*/
+#search {
+    display: inline-block;
+    border: 1px solid #dfdfdf;
+    border-radius: 3px;
+}
+
+#search > input {
+    border: 0px;
+    border-radius: 3px;
+    width: 200px;
+}
+
+#search > i {
+    padding: 0 5px;
+}
+
+#search > i:hover {
+    cursor: pointer;
+    color: #af0d10;
+}
+
+#right-left > div:nth-child(2) {
+    border: 1px solid #dfdfdf;
+    height: 95%;
+}
+
+/*菜单区#foodList*/
+#foodList {
+    height: calc(100% - 76px);
+    overflow-y: auto;
+}
+
+#foodList > div {
+    margin: 8px;
+    height: 800px;
+
+}
+
+/*每一菜单项*/
+#foodList table {
+    width: 100%;
+}
+
+#foodList table tr {
+    width: 100%;
+    border: 1px solid #f0f0f0;
+}
+
+#foodList table tr > td {
+    text-align: center;
+    padding-bottom: 4px;
+}
+
+#foodList table tr > td > label {
+    display: inline-block;
+    background-color: #fbfbfb;
+    padding: 10px 0px;
+    width: 100%;
+    border-right: 1px solid #dfdfdf;
+    border-radius: 5px;
+}
+
+#foodList table tr > td > input {
+    display: inline-block;
+    width: 40px;
+}
+
+#foodList table tr > td > span {
+    display: inline-block;
+    background-color: #98d261;
+    color: white;
+    width: 26px;
+    height: 26px;
+    line-height: 25px;
+    border-radius: 13px;
+}
+
+#foodList table tr > td > span:hover {
+    cursor: pointer;
+}
+
+/*附加窗口*/
+#seatWindow, #orderWindow, #payWindow {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 1);
+    display: none;
+}
+
+#orderTitle {
+    margin: 20px;
+    background-color: #fbfbfb;
+    padding: 20px
+}
+
+#orderTitle > label {
+    font-size: 25px;
+}
+
+/**就餐人数*/
+#people {
+    margin: 20px;
+    height: calc(100% - 140px);
+    position: relative;
+    background-color: #fbfbfb;
+}
+
+#people > div:first-child {
+    margin: 20px;
+    padding: 20px 0;
+    border-bottom: 1px #e0e0e0 dashed;
+}
+
+#people > div:first-child > input {
+    margin: 0px 10px;
+    border-radius: 3px;
+    height: 30px;
+    width: 100px;
+}
+
+#people > div:last-child {
+    margin: 20px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+#people table {
+    width: 100%;
+    text-align: center;
+}
+
+#people table tr {
+
+}
+
+#people table td {
+    border: 1px solid #dfdfdf;
+    height: 100px;
+}
+
+#people table td {
+    cursor: pointer;
+}
+
+#people table td div {
+    letter-spacing: 10px;
+}
+
+#selectTab {
+    width: 100%;
+    padding: 20px 0;
+    margin-top: 10px;
+}
+
+#selectTab button {
+    float: right;
+    background: #419344;
+    border: 0;
+    padding: 5px 20px;
+    color: white;
+    border-radius: 3px;
+}
+
+#selectTab button:hover {
+    cursor: pointer;
+}
+
+.choose {
+    font-size: 18px;
+    color: #419344;
+}
+
+.usedSeat {
+    background-color: #FFB800;
+    color: #F2ECEC;
+}
+
+.selectedSeat {
+    background-color: #5FB878;
+    color: white;
+}
+
+#payWindow > div:first-child {
+    margin: 15px;
+    font-size: 20px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 2px;
+    padding: 0px 20px;
+    background-color: #dfdfdf;
+}
+
+#payWindow > div:last-child {
+    border: 1px solid #e0e0e0;
+    height: calc(100% - 60px);
+    margin: 15px;
+
+}
+
+#payWindow > div:first-child > label:first-child {
+    color: #af1010;
+}
+
+#payWindow > div:first-child > span {
+    float: right;
+}
+
+#payWindow > div:first-child > span > i {
+    font-size: 20px;
+}
+
+#payWindow > div:first-child > span > i:hover {
+    cursor: pointer;
+    color: black;
+}
+
+#payWindow-show {
+    display: inline-block;
+    height: 100%;
+    padding: 10px;
+    width: calc(60% - 31px);
+    border-right: 1px dashed #e0e0e0;
+}
+
+#payWindow-show table {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+}
+
+#payWindow-show table td {
+    border-radius: 5px;
+    padding: 20px;
+}
+
+#payWindow-show table td label {
+    font-size: 30px;
+    color: #af0d10;
+}
+
+#payWindow-show table td span {
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 20px;
+}
+
+#payWindow-show table td button {
+    width: 100%;
+    height: 50px;
+    background-color: #af0d10;
+    cursor: pointer;
+    color: white;
+    font-size: 24px;
+    border: 0px;
+    border-radius: 10px;
+}
+
+#payWindow-calc {
+    display: inline-block;
+    height: 100%;
+    width: 40%;
+    padding: 5px;
+}
+
+#payWindow-calc > table {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+
+#payWindow-calc > table label {
+    font-size: 24px;
+    margin: 10px;
+    display: inline-block;
+    float: left;
+}
+
+#payWindow-calc > table input {
+    float: left;
+    height: 50px;
+    display: block;
+    width: calc(100% - 47px);
+    margin-bottom: 10px;
+    border-radius: 15px;
+    margin: 3px;
+    background-color: aliceblue;
+    text-align: right;
+    font-size: 40px;
+    padding: 5px 20px;
+
+}
+
+#payWindow-calc > table tr td {
+    padding: 0px;
+}
+
+#payWindow-calc > table button {
+    width: 100%;
+    font-size: 30px;
+    background-color: #dfdfdf;
+    border: 1px solid white;
+    height: 63px;
+    cursor: pointer;
+}
+
+#payWindow-calc > table #calcc {
+    background-color: #fe6700;
+}
+
+#payWindow-calc > table #calcDel {
+    background-color: #fb0102;
+}
+
+#payWindow-calc > table #calSubPay {
+    margin-top: 10px;
+    background-color: #5FB878;
+    border-radius: 3px;
+}
+
+
+/*帐单列表*/
+#orderList {
+
+}
+
+#orderListClose, #downListClose {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 15px;
+    background-color: #e0e0e0;
+    border: 0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #666665;
+    cursor: pointer;
+}
+
+#orderListTitle {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #fdfdfd;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#orderListTitle > span {
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+#orderListContent {
+    width: calc(100% - 40px);
+    padding: 20px;
+    height: calc(100% - 60px);
+    background-color: #f5f5f5;
+    position: relative;
+}
+
+#orderListContent > table {
+    width: 100%;
+    position: relative;
+}
+
+#orderListContent > table > tbody {
+    margin: 20px;
+    padding: 20px;
+}
+
+#orderListTable th {
+    padding: 10px;
+    text-align: center;
+    background-color: #af0d10;
+    color: white;
+}
+
+#orderListTable td {
+    text-align: center;
+    padding: 16px 0px;
+    border-bottom: 1px dashed #e0e0e0;
+}
+
+#orderListTable td > i:first-child {
+    color: dodgerblue;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#orderListTable td > i:last-child {
+    color: #E41B1E;
+    cursor: pointer;
+}
+
+#orderListTable tr:nth-child(2n+1) {
+    background-color: #FDFDFD;
+}
+
+/*订单列表分页*/
+#orderListPage {
+    position: absolute;
+    background-color: #FDFDFD;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    margin-left: -20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+#orderDetails {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #f5f5f5;
+    display: none;
+}
+
+#orderDetails button {
+    background-color: #af0d10;
+    position: absolute;
+    right: 20px;
+    bottom: 60px;
+    padding: 5px 10px;
+    border: 0;
+    border-radius: 3px;
+    color: white;
+    width: 80px;
+}
+
+#orderDetails > table > thead {
+    width: 100%;
+    border: 1px solid black;
+    background-color: black;
+}
+
+#orderDetails > table {
+    width: calc(100% - 40px);
+    margin: 20px;
+}
+
+#orderDetails tbody {
+    margin: 20px;
+    border: 1px dashed white;
+}
+
+#orderDetails th {
+    text-align: center;
+    padding: 13px;
+    background-color: #fdfdfd;
+    border: 2px solid #e0e0e0;
+}
+
+#orderDetails td {
+    padding: 8px;
+    border: 1px dashed #e0e0e0;
+    background-color: #fafafa;
+}
+
+#detail-slt {
+    padding: 0px;
+}
+
+#detail-slt table {
+    width: 100%;
+}
+
+#detail-slt tr th {
+    border: 1px solid #e0e0e0;
+}
+
+#detail-slt tr td {
+    text-align: center;
+}
+
+#detail-slt td input[type=checkbox] {
+    width: 10px;
+}
+
+#detail-slt td input[type=button] {
+    width: 40px;
+    background-color: #1E9FFF;
+    color: white;
+    border: 0;
+    border-radius: 2px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

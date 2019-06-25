@@ -1,0 +1,417 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <link href="../css/demo.css" rel="stylesheet"/>
+    <link href="../css/index.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="container">
+    <!--导航栏-->
+    <div id="topNav">
+        <div id="logo">LOGO</div>
+        <ul>
+            <li><i class="fa fa-cny"></i>收银</li>
+            <li><i class="fa fa-tablet"></i>上网</li>
+            <li><i class="fa fa-user-o"></i>会员</li>
+            <li><i class="fa fa-envelope-o"></i>消息</li>
+            <li><i class="fa fa-list-alt"></i>当班帐单</li>
+            <li><i class="fa fa-link"></i>交接班</li>
+            <li><i class="fa fa-chevron-down"></i>更多</li>
+            <li><i class="fa fa-list"></i></li>
+        </ul>
+    </div>
+
+    <div id="content">
+        <div id="left">
+            <div id="left-bar">
+                <ul>
+                    <li onclick="funShowAllFood()">所有</li>
+                </ul>
+            </div>
+            <div id="left-right">
+                <div>
+                    <label>饮品</label>
+                    <span id="search">
+							<input type="text" placeholder="请输入菜品、菜名或编号搜索"/>
+							<i class="fa fa-search"></i>
+						</span>
+                </div>
+                <div id="foodList">
+                    <div>
+                        <table>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="right">
+            <!--客单-->
+            <div id="order">
+                <div>
+                    <div>
+                        <span>NO.<label id="orderId">-------------</label></span>
+                        <span id="time"></span>
+                    </div>
+                    <div>
+                        <label>客单</label>
+                        <span id="deleteOrder" class="emptyOrder"><i class="fa fa-trash"></i></span>
+                    </div>
+                </div>
+                <div>
+                    <table id="saleItem">
+                        <tr>
+                            <th>项</th>
+                            <th>品名</th>
+                            <th>单价</th>
+                            <th>数量</th>
+                            <th>金额</th>
+                        </tr>
+                    </table>
+                </div>
+                <!--总价-->
+                <div id="totalPrice">
+                  <span>
+                    <label>合计</label>
+                    <label id="saleNum"></label>
+                    <label>项</label>
+                  </span>
+                          <span>
+                    <label>￥</label>
+                    <label id="calcTotal"></label>
+                  </span>
+
+                </div>
+            </div>
+            <!--选座窗口-->
+            <div id="seatWindow" class="animated">
+                <button id="downListClose">
+                    <i class="fa fa-close"></i>
+                </button>
+                <div id="orderTitle">
+                    <label>订单号</label>
+                    <label></label>
+                </div>
+                <div id="people">
+                    <div>
+                        <label>就餐人数:</label>
+                        <input type="number" min="1" value="1" id="dinersNum">
+                        <label>人</label>
+                    </div>
+                    <div>
+                        <table>
+                        </table>
+                        <div id="selectTab">
+                            <label>已选:</label>
+                            <label class="choose"></label>
+                            <button id="updateSaleTable">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--支付窗口-->
+            <div id="payWindow">
+                <div>
+                    <label>支付：</label>
+                    <label>订单号</label>
+                    <label id="paySaleId"></label>
+                    <span><i class="fa fa-close"></i></span>
+                </div>
+                <div>
+                    <div id="payWindow-show">
+                        <table>
+                            <tr>
+                                <td>
+                                    <span>应收金额</span>
+                                    <label id="shouldPay"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>实收金额</span>
+                                    <label id="realPay"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>找零金额</span>
+                                    <label id="returnPay"></label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <button id="subPay">完成交易</button>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div><!--
+					-->
+                    <div id="payWindow-calc">
+                        <table>
+                            <tr>
+                                <td colspan="3">
+                                    <label>支付金额</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><input id="inputPay" type="text" placeholder="0"/></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button id="calcc">←</button>
+                                </td>
+                                <td colspan="2">
+                                    <button id="calcDel">del</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button class="num">1</button>
+                                </td>
+                                <td>
+                                    <button class="num">2</button>
+                                </td>
+                                <td>
+                                    <button class="num">3</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button class="num">4</button>
+                                </td>
+                                <td>
+                                    <button class="num">5</button>
+                                </td>
+                                <td>
+                                    <button class="num">6</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button class="num">7</button>
+                                </td>
+                                <td>
+                                    <button class="num">8</button>
+                                </td>
+                                <td>
+                                    <button class="num">9</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <button id="calc0">0</button>
+                                </td>
+                                <td>
+                                    <button class="num">.</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <button id="calSubPay">确定</button>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!--订单窗口-->
+            <div id="orderWindow" style="display: none" class="animated">
+                <button id="orderListClose">
+                    <i class="fa fa-close"></i>
+                </button>
+                <div id="orderListTitle">
+                    <span>订单列表</span>
+                </div>
+                <div id="orderListContent">
+                    <table id="orderListTable">
+                        <thead>
+
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>订单号</th>
+                            <th>就餐人数</th>
+                            <th>下单时间</th>
+                            <th>订单金额</th>
+                            <th>桌号</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr>
+                            <td>1555930429165</td>
+                            <td>2</td>
+                            <td>2019/4/22 19:00:01</td>
+                            <td>84.00</td>
+                            <td>1号桌</td>
+                            <td>未出菜</td>
+                            <td>
+                                <i class="fa fa-arrow-right"></i>
+                                <i class="fa fa-close"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1555930720102</td>
+                            <td>3</td>
+                            <td>2019/04/22 18:58:58</td>
+                            <td>48.00</td>
+                            <td>9号桌</td>
+                            <td>未出菜</td>
+                            <td>
+                                <i class="fa fa-arrow-right"></i>
+                                <i class="fa fa-close"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1555930647896</td>
+                            <td>1</td>
+                            <td>2019/04/22 18:57:35</td>
+                            <td>11.00</td>
+                            <td>5号桌</td>
+                            <td>未出菜</td>
+                            <td>
+                                <i class="fa fa-arrow-right"></i>
+                                <i class="fa fa-close"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1555930547647</td>
+                            <td>2</td>
+                            <td>2019/04/22 18:55:51</td>
+                            <td>125.00</td>
+                            <td>7号桌</td>
+                            <td style="color:red">出菜中</td>
+                            <td>
+                                <i class="fa fa-arrow-right"></i>
+                                <i class="fa fa-close"></i>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
+                    <div id="orderListPage"></div>
+                    <!--订单明细-->
+                    <div id="orderDetails">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <th colspan="2">
+                                    <label>订单号</label>
+                                    <label id="detail-orderId">1555915940147</label>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>桌号:</label>
+                                    <label id="detail-tableId">5号桌</label>
+                                </td>
+                                <td>
+                                    <label>就餐人数:</label>
+                                    <input type="number" value="2" min="1" max="6" id="detail-diners"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>下单时间:</label>
+                                    <label id="detail-orderTime">2019/4/22 16:12:45</label>
+                                </td>
+                                <td>
+                                    <label>订单金额：￥</label>
+                                    <label id="detail-price">57.00</label>
+                                </td>
+                            </tr>
+                            <!--订单项列表-->
+                            <tr id="detail-slt">
+                                <td colspan="2">
+                                    <table>
+                                        <tr>
+                                            <th>订单项号</th>
+                                            <th>品名</th>
+                                            <th>口味</th>
+                                            <th>价格</th>
+                                            <th>数量</th>
+                                            <th>小计</th>
+                                            <th>出菜</th>
+                                            <th>删除</th>
+                                            <th>确定</th>
+                                        </tr>
+                                        <tr>
+                                            <td>15559159401471</td>
+                                            <td>百香粒粒</td>
+                                            <td>普通口味</td>
+                                            <td>￥11.00</td>
+                                            <td>2</td>
+                                            <td>￥22.00</td>
+                                            <td>
+                                                <input type="checkbox"/>
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-close"></i>
+                                            </td>
+                                            <td>
+                                                <input type="button" value="确定"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>15559159401472</td>
+                                            <td>香辣炸鸡牛肉盖浇饭</td>
+                                            <td>普通口味</td>
+                                            <td>￥10.00</td>
+                                            <td>1</td>
+                                            <td>￥35.00</td>
+                                            <td>
+                                                已出菜
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-close"></i>
+                                            </td>
+                                            <td>
+                                                <input type="button" value="确定"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                            </tr>
+
+
+                            </tbody>
+
+                        </table>
+                        <button>关闭</button>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div id="bottom">
+        <div id="leftBt">
+            <button id="c-newOrder"><i class="fa fa-upload"></i>新单</button>
+        </div>
+        <div id="rightBt">
+            <button id="c-logOrder"><i class="fa fa-download"></i>挂单</button>
+            <button id="c-selectSeat"><i class="fa fa-hand-pointer-o"></i>选座</button>
+            <button id="c-payOrder"><i class="fa fa-rmb"></i>结账</button>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/index.js"></script>
+</body>
+</html>

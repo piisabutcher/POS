@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" type="text/css" href="../css/demo.css">
+    <link rel="stylesheet" type="text/css" href="../css/admin.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/animate.css"/>
+</head>
+<body>
+<div id="left">
+    <div></div>
+    <ul>
+        <li>
+            <div><i class="fa fa-user"></i></div>
+            <span>会员</span>
+            <!--<ul>
+                <li>员工管理</li>
+                <li>会员管理</li>
+            </ul>-->
+        </li>
+        <li>
+            <div><i class="fa fa-glass"></i></div>
+            <span>餐饮</span>
+            <!--<ul>
+                <li>菜品管理</li>
+                <li>菜单管理</li>
+            </ul>-->
+        </li>
+    </ul>
+</div>
+<div id="right">
+    <div id="head"></div>
+    <div id="content">
+        <!--员工用户列表-->
+        <div id="content-worker" class="animated">
+            <div>
+                <table>
+                    <tr>
+                        <th>工号</th>
+                        <th>密码</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>联系电话</th>
+                        <th>权限</th>
+                        <th>操作</th>
+                    </tr>
+                </table>
+                <ul id="pageCon">
+                    <li id="first">首页</li>
+                    <li id="prev"><i class="fa fa-arrow-left"></i></li>
+                    <li id="now">1</li>
+                    <li id="next"><i class="fa fa-arrow-right"></i></li>
+                    <li id="last">尾页</li>
+                </ul>
+            </div>
+            <div id="crudUser">
+                <div>编辑用户</div>
+                <form>
+                    <div>
+                        <label>工号</label>
+                        <input type="text" value=""/>
+                    </div>
+                    <div>
+                        <label>用户名</label>
+                        <input type="text" value=""/>
+                    </div>
+                    <div class="SelectSex">
+                        <label class="layui-form-label">性别</label>
+                        <div>
+                            <div>
+                                <span>男</span>
+                                <input type="radio" name="sex" value="男" title="男" checked="">
+                            </div>
+                            <div>
+                                <span>女</span>
+                                <input type="radio" name="sex" value="男" title="男" checked="">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div>
+                        <label>联系电话</label>
+                        <input type="text" value=""/>
+                    </div>
+                    <button id="crudSubmit">提交更改</button>
+                </form>
+            </div>
+        </div>
+        <!--菜品列表-->
+        <div id="content-catalog" class="animated">
+            <div id="catalog-food">
+                <span><i class="fa fa-arrow-left"></i></span>
+                <ul>
+                </ul>
+                <span><i class="fa fa-arrow-right"></i></span>
+            </div>
+            <div id="catalogList">
+                <ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--菜单修改,原生自制模态框-->
+<div id="food-modal" class="animated">
+    <div class="closeBar">
+        <div></div>
+    </div><!--
+	 -->
+    <div id="food-details">
+        <div>
+            <img id="detail-img" src="" alt="dad">
+            <table>
+                <tr id="detail-name">
+                    <td colspan="2"></td>
+                </tr>
+                <tr id="detail-catalog">
+                    <td>分类</td>
+                    <td>
+                        <select>
+
+                        </select>
+                    </td>
+                </tr>
+                <tr id="detail-price">
+                    <td>价格</td>
+                    <td>
+                        <input type="number" value="35"/><span>元</span>
+                    </td>
+                </tr>
+                <tr id="detail-id">
+                    <td>编号</td>
+                    <td></td>
+                </tr>
+                <tr id="detail-subTime">
+                    <td>供应时段</td>
+                    <td>
+                        <select>
+
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <button id="subFood">提交更改</button>
+            <button id="delFood">删除此菜品</button>
+        </div>
+        <div>
+
+
+        </div>
+
+
+    </div>
+</div>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/admin.js"></script>
+</body>
+</html>
