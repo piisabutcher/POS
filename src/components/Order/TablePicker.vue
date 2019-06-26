@@ -193,19 +193,21 @@
         },
         //处理餐桌分配
         apiDistributeTable(add){
+          console.log(parseInt(this.pickTable));
           this.$axios.post("/api/sale/updateSaleTable",{
             saleId : this.mySale.saleId,
-            tableId : this.pickTable.charAt(0),
+            tableId : parseInt(this.pickTable),
             dinner_num : this.dinner_num,
             isAdd : add
           }).then(res => {
+            this.mySale = res.data;
             this.getTableList();
           })
 
         },
         emptyTable(){
           this.$axios.post("/api/sale/emptyDiningTable",{
-            tableId : this.pickTable.charAt(0),
+            tableId : parseInt(this.pickTable),
           }).then(() => {
             this.getTableList();
           })
@@ -253,12 +255,13 @@
       width: calc(100% - 40px);
       height: calc(90% - 96px);
       padding: 20px;
-      background-color: #fbfbfb;
+      background: linear-gradient(190deg, #930b1f 40%, #fff 40%,
+        #fff 60%, #484347 60%);
      table{
        width: 100%;
-       background-color: #fff;
        height: 100%;
        tr{
+         background-color: #fff;
          border: {
            top: 2px solid #e0e0e0;
            right: 2px solid #e0e0e0;
@@ -279,18 +282,11 @@
            border: {
              left: 2px solid #e0e0e0;
              right: 2px solid #e0e0e0;
-             top: 2px solid #af0d10;
-             bottom: 2px solid #af0d10;
            }
          }
 
        }
-       tr:nth-child(1),tr:nth-child(3){
-         background-color: #e6ffd7;
-       }
-       tr:nth-child(2){
-         background-color: #bcffa6;
-       }
+
       }
     }
     .tableFooter{

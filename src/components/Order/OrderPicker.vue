@@ -36,6 +36,10 @@
         <li v-for="(item,index) in foodList"
             :key="index">
           <span>{{item.foodId}}</span>
+          <div class="image">
+            <img :src="item.image"
+                 :alt="item.foodName">
+          </div>
           <label>{{item.foodName}}</label>
           <span class="salePrice">售价：￥{{item.price}}</span>
           <div class="taste">
@@ -249,17 +253,17 @@
           border-top-right-radius: 4px;
           border-bottom-right-radius: 4px;
           text-align: left;
-          height: 50px;
-          line-height: 50px;
+          height: 80px;
+          line-height: 80px;
           &>span:first-child{
             display: inline-block;
-            height: 50px;
+            height: 80px;
             padding: 0 20px;
             border-right: 1px solid #b2b2b2;
           }
           &>label{
             display: inline-block;
-            width: 20%;
+            width: 15%;
             text-align: center;
           }
           .salePrice{
@@ -271,7 +275,7 @@
           .taste{
             display: inline-block;
             border-right: 1px solid #b2b2b2;
-            width: 40%;
+            width: 38%;
             height: 100%;
             vertical-align: top;
             padding: 0 10px;
@@ -292,6 +296,20 @@
             }
 
           }
+          .image{
+            width: 60px;
+            height: 70px;
+            padding: 5px;
+
+            display: inline-block;
+            vertical-align: top;
+            img{
+              width: 100%;
+              height: 100%;
+              display: block;
+              object-fit: cover;
+            }
+          }
           &>span:last-child{
             display: inline-block;
             box-shadow: 0 0 10px #98d261;
@@ -299,8 +317,8 @@
             width: 40px;
             height: 40px;
             line-height: 40px;
-            margin-top: 5px;
-            margin-right: 10px;
+            margin-top: 20px;
+            margin-right: 18px;
             text-align: center;
             font-size: 16px;
             background-color: #98d261;

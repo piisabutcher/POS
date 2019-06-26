@@ -21,32 +21,55 @@
         :data="orderList"
         height="100%"
         border
-        style="width: 100%">
+        stripe
+        :cell-style="myTable"
+        :header-cell-style="myTable"
+        style="width: 100%"
+        @row-click="handleRowClick">
         <el-table-column
           prop="saleId"
-          label="订单号"
-          width="180">
+          label="订单号">
         </el-table-column>
         <el-table-column
           prop="dinners_num"
           label="就餐人数"
-          width="180">
+          width="80">
         </el-table-column>
         <el-table-column
-          prop="date"
-          label="下单时间">
+          prop="sale_time"
+          label="下单时间"
+          :formatter="formatDate">
         </el-table-column>
         <el-table-column
           prop="total_amt"
-          label="订单金额">
+          label="订单金额"
+          width="100">
         </el-table-column>
         <el-table-column
-          prop="dt_id"
-          label="桌号">
+          prop="diningTableList"
+          label="桌号"
+          :formatter="formatTable">
         </el-table-column>
         <el-table-column
           prop="is_complete"
-          label="状态">
+          label="状态"
+          width="120"
+          :formatter="formatIs_Complete">
+        </el-table-column>
+        <el-table-column label="操作"
+          :formatter="formatOperate">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              type="success"
+              v-show="scope.row.is_complete === 0"
+              @click="handlePickTable(scope.$index, scope.row)">选桌</el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              v-show="scope.row.is_complete === 0"
+              @click="handlePayOrder(scope.$index, scope.row)">结账</el-button>
+          </template>
         </el-table-column>
       </el-table>
 
@@ -61,10 +84,12 @@
       data(){
         return{
           orderList:[],
+          mySaleId:"",
+          mySale:{}
         }
       },
       created(){
-        this.getAllSale();
+        this.getUncompletedSale();
       },
       methods:{
         closeOrderList(){
@@ -89,6 +114,56 @@
             .then( res=> {
               this.orderList = res.data;
             })
+        },
+        handlePayOrder(index, row){
+          this.currentSale = row;
+          this.$emit("listToPay", this.currentSale);
+        },
+        handlePickTable(index, row){
+          this.currentSale = row;
+          this.$emit("listToTable", this.currentSale);
+        },
+        handleRowClick(row){
+          this.currentSale = row;
+          this.$emit("showLinkSale",this.currentSale);
+        },
+        formatDate:function (row) {
+          return this.getYYYYMMDD(row.sale_time);
+        },
+        formatIs_Complete:function(row, column){
+          return row.is_complete === 0 ? "未完成":"已完成";
+        },
+        formatTable:function(row){
+          let str = "";
+          row.diningTableList.forEach(table => {
+            str += table.dt_Id + " ";
+          });
+          return str;
+        },
+        formatOperate:function(row){
+
+        },
+        getYYYYMMDD (str) {
+          let nDate = new Date(str);
+          let nYear = nDate.getFullYear();
+          let nMonth = nDate.getMonth() + 1;
+          let nDay = nDate.getDate();
+          let nHours = nDate.getHours();
+          let nMinutes = nDate.getMinutes();
+          let nSeconds = nDate.getSeconds();
+          let nTime = nYear + '-' + this.addZero(nMonth) + '-' + this.addZero(nDay); // YYYY-MM-DD
+          let nDateTime = nTime + ' ' + this.addZero(nHours) + ':' + this.addZero(nMinutes) + ':' + this.addZero(nSeconds);// YYYY-MM-DD-MM-SS
+          return nDateTime // 格式为 YYYY-MM-DD-HH-MM-SS
+        },
+        addZero (num) {
+          if (parseInt(num) < 10) {
+            num = '0' + num
+          }
+          return num
+        },
+        myTable(){
+          return "text-align:center";
+
         }
       }
     }

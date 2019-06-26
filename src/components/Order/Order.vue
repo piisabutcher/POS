@@ -70,7 +70,9 @@
                    :currentSale="currentSale"
                    @addSlt="addSaleLineItem"
                    @showLinkSale="showLinkSale"
-                   @orderChange="showLinkSale"></router-view>
+                   @orderChange="showLinkSale"
+                    @listToTable="listToTable"
+                  @listToPay="listToPay"></router-view>
     </transition>
 
   </div>
@@ -157,6 +159,16 @@
         payOrder(){
           this.$router.push("/home/order/orderPay");
         },
+        listToTable(sale){
+          this.currentSale = sale;
+          this.currentSaleId = this.currentSale.saleId;
+          this.pickTable();
+        },
+        listToPay(sale){
+          this.currentSale = sale;
+          this.currentSaleId = this.currentSale.saleId;
+          this.payOrder();
+        },
         showTime(){//实时显示当前时间
           let today = new Date();//定义日期对象
           let yyyy = today.getFullYear();
@@ -225,8 +237,9 @@
           }
         }
         button:first-child{
-          background-color: #4e555b;
-          color: white;
+          background-color: white;
+          border: 1px solid #eee;
+          color: black;
           float: left;
         }
       }

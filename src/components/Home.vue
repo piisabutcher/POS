@@ -21,15 +21,15 @@
       methods: {
         changeView: function (index) {
           switch (index) {
-            case 0 : {this.$router.push("/home/order")}break;
+            case 0 : {this.$router.push("/home/order");}break;
             case 1 : {this.$router.push("/home/statistics");}break;
             case 2 : {}break;
             case 3 : {}break;
             case 4 : {}break;
             case 5 : {}break;
-            case 6 : {}break;
-            case 7 : {this.$router.push("/home/order/orderList")}break;
-            default: {this.$router.replace({name:"statistics"})}
+            case 6 : {this.$router.push("/login");}break;
+            case 7 : {this.$router.push("/home/order/orderList");}break;
+            default: {this.$router.replace({name:"statistics"});}
           }
 
         },

@@ -32,7 +32,7 @@ export default new Router({
     path: '/admin',
     component: Admin,
     children:[
-      { path:"/", component:User },
+      { path:"/", component:Catalog },
       { path:'user', component:User },
       { path:'food/:catalog', component:Food },
       { path:'catalog', component:Catalog },
@@ -64,5 +64,7 @@ export default new Router({
   },{
     path: '/empty',
     component: Empty
-  }]
+  }],
+
 })
+

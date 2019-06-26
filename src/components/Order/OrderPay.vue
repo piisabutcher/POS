@@ -63,7 +63,7 @@
               </tr>
             </table>
           </div>
-          <el-button @click=" exitOrder">结束交易</el-button>
+          <el-button @click="exitOrder">结束交易</el-button>
         </div>
       </div>
 
@@ -170,6 +170,7 @@
               this.saleList = res.data;
               if(this.mySaleId === ""){
                 this.mySaleId = this.saleList[0].saleId;
+                this.mySale = this.saleList[0];
               }
             });
         },
@@ -185,20 +186,22 @@
         },
         //提交支付金额
         doPay(){
-          console.log(this.mySaleId);
-          console.log(this.realPay);
           this.$axios.post('/api/sale/paySale',{
             saleId: this.mySaleId,
             realPay : this.realPay
           }).then(res=>{
             console.log(res);
+            if(res.data === ""){
+              this.$alert("金额不足，无法结账！");
+              this.realPay  = 0;
+            }
             this.returnMoney = res.data.pay_change;
           })
         },
         exitOrder(){
+          this.getUncompletedSale();
+          this.$emit("showLinkSale", this.mySale);
           this.closeOrderPay();
-          this.initShow();
-          this.$router.push("/empty");
         }
       }
     }

@@ -444,7 +444,7 @@
 
 <style lang="scss">
   #statistics{
-    background-color: #fdfdfd;
+    background-color: #f0f0f0;
     width: 100%;
     height: calc(100% - 70px);
     #condition{
@@ -515,7 +515,7 @@
       display: inline-block;
       width:calc(70% - 21px);
       height: calc(100% - 20px);
-      background-color: #e2e9f1;;
+      background-color: #f0f0f0;
       vertical-align: top;
       text-align: center;
       padding: 10px;

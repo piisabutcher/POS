@@ -1,6 +1,11 @@
 <template>
   <div id="header">
-    <div id="logo">LOGO</div>
+    <div id="logo">
+      <div>
+        <img src="../../static/img/micky.png"
+        alt="logo"/>
+      </div>
+    </div>
     <ul>
       <li v-for="(item,index) in navList"
           @click="changeContent(index)" :class="{selected:index === currentSelect}">
@@ -37,8 +42,8 @@
               name: "交接班",
               iClass: "fa fa-link"
             },{
-              name: "更多",
-              iClass: "fa fa-chevron-down"
+              name: "退出",
+              iClass: "fa fa-power-off"
             },{
               name: "",
               iClass: "fa fa-list"
@@ -67,6 +72,16 @@
       float: left;
       font-size: 38px;
       width: 30%;
+      div{
+        height: 100%;
+        width: 200px;
+        img{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+      }
     }
     ul{
       display: inline-block;

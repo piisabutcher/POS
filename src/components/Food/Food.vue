@@ -47,9 +47,9 @@
             <img :src="food.image"
                  :alt="food.foodName">
           </div>
-          <el-dialog :visible.sync="dialogVisible" size="tiny">
+          <!--<el-dialog :visible.sync="dialogVisible" size="tiny">
             <img width="100%" :src="dialogImageUrl" alt="">
-          </el-dialog>
+          </el-dialog>-->
         </div>
         <div class="con-1">
           <label>菜类:</label>
@@ -222,6 +222,7 @@
         showFood(food){
           this.food = food;
           this.isAdd = false;
+          this.initFood();
         },
         handleCloseTag(tag){
           let index;
@@ -242,20 +243,20 @@
           for(let i=0; i<noSelect.length; i++){
             if(tag === noSelect[i]){
               this.myTags.selected.push(tag);
+              console.log("++");
               noSelect.splice(i ,1);
             }
           }
         },
         updateFood(isAdd){
           if(isAdd){
-            console.log(this.food);
-            alert("添加成功！");
             this.$axios.post("/api/food/saveFood",this.food)
               .then(res => {
                 this.$alert('添加成功！', '提示', {
                   confirmButtonText: '确定',
                   callback: action => {
                     this.getCatalogById();
+                    this.showFood();
                   }
                 });
               })
@@ -264,7 +265,6 @@
             this.isAdd = false;
             let postFood = JSON.parse(JSON.stringify(this.food));
             postFood.taste = this.myTags.selected;
-            console.log(postFood);
             this.$axios.post("/api/food/updateFood",postFood)
               .then(res => {
                 this.$alert('修改成功！', '提示', {
@@ -279,7 +279,7 @@
         },
         addFood(){
           this.food = {};
-          this.myTags.noSelected = this.myTags.all;
+          this.myTags.noSelected = JSON.parse(JSON.stringify(this.myTags.all));
           this.myTags.selected.length = 0;
           this.isAdd = true;
           this.food.taste = this.myTags.selected;

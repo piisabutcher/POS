@@ -1,7 +1,12 @@
 <template>
   <div id="admin">
     <div id="left">
-      <div class="logo">LOGO</div>
+      <div class="logo">
+        <div>
+          <img src="../../static/img/micky.png"
+               alt="logo"/>
+        </div>
+      </div>
       <ul>
         <li v-for="(item,index) in li"
             :class="{'click':activeLi === index}"
@@ -15,7 +20,8 @@
     </div>
     <div id="right">
       <div id="head">
-        <span @click="myBack">返回</span>
+        <span @click="myQuit"><i class="fa fa-power-off"></i>退出</span>
+        <span @click="myBack"><i class="fa fa-mail-reply"></i>返回</span>
       </div>
       <router-view class="router-view"></router-view>
     </div>
@@ -30,14 +36,14 @@
         return{
           li:[
             {
-              label:'会员',
+              label:'用户',
               class:'fa fa-user'
             },{
               label:'餐饮',
               class:'fa fa-glass'
             }
           ],
-          activeLi:0,
+          activeLi:1,
 
 
         }
@@ -60,6 +66,9 @@
         },
         myBack(){
           this.$router.back();
+        },
+        myQuit(){
+          this.$router.push("/login");
         }
 
       }
@@ -78,12 +87,24 @@
     float: left;
     background-color: #3a4a5a;
     .logo{
-      background-color: #555555;
+      background-color: #313236;
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 40px;
       color: white;
+      div{
+        height: 60px;
+        width: 100px;
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        img{
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+      }
     }
     div{
       height: 70px;
@@ -128,19 +149,22 @@
   #head{
     height: 69px;
     border-bottom: 1px solid #e0e0e0;
-    background-color: #3a4a5a;
+    background-color: #313236;
     span{
       cursor: pointer;
       display: inline-block;
       background-color: #5F7888;
       color: white;
-      width: 50px;
+      width: 100px;
       height: 50px;
-      border-radius: 50%;
+      border-radius: 5%;
       line-height: 50px;
       text-align: center;
       margin: 10px;
       float: right;
+      i{
+        margin-right: 10px;
+      }
     }
   }
   #right{
