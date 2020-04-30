@@ -15,7 +15,7 @@
     "axios": "^0.18.0",
     "element-ui": "^2.8.2",
     "highcharts": "^7.1.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "layui-src": "^2.4.5",
     "mockjs": "^1.0.1-beta3",
     "vue": "^2.5.2",
